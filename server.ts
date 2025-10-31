@@ -19,6 +19,7 @@ import {AppSession} from '~/lib/session.server';
 import {getLocaleFromRequest} from '~/lib/server-utils/locale.server';
 import {getOxygenEnv} from '~/lib/server-utils/oxygen.server';
 import {createAdminClient, getAdminHeaders} from '~/lib/admin-api';
+import {wrapStorefrontWithMarket} from '~/lib/storefront-api/market-context';
 import defaultThemeData from '~/config/default-theme-data.json';
 
 /**
@@ -53,7 +54,7 @@ export default {
       /**
        * Create Hydrogen's Storefront client.
        */
-      const {storefront} = createStorefrontClient({
+      const {storefront: baseStorefront} = createStorefrontClient({
         cache,
         waitUntil,
         i18n: getLocaleFromRequest(request),
@@ -63,6 +64,14 @@ export default {
         storefrontId: env.PUBLIC_STOREFRONT_ID,
         storefrontHeaders: getStorefrontHeaders(request),
       });
+
+      /**
+       * Wrap the storefront client to inject market context into all queries.
+       */
+      const storefront = wrapStorefrontWithMarket(
+        baseStorefront,
+        env.SHOPIFY_STOREFRONT_MARKET,
+      );
 
       /**
        * Create a client for Customer Account API.
