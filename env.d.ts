@@ -40,7 +40,6 @@ declare global {
     PUBLIC_STOREFRONT_ID: string;
     SESSION_SECRET: string;
     SHOP_ID: string;
-    SHOPIFY_STOREFRONT_MARKET?: string;
   }
 
   interface Window {
