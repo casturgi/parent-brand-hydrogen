@@ -15,14 +15,12 @@ export const getFilters = async ({
   searchTerm,
   siteSettings,
   storefront,
-  context,
 }: {
   handle?: string;
   searchParams: URLSearchParams;
   searchTerm?: string;
   siteSettings: RootSiteSettings;
   storefront: AppLoadContext['storefront'];
-  context: AppLoadContext;
 }): Promise<{
   activeFilterValues: ActiveFilterValue[];
   filters: ProductFilter[];
@@ -41,9 +39,8 @@ export const getFilters = async ({
           query ProductsSearchFilters(
             $country: CountryCode
             $language: LanguageCode
-            $market: String
             $searchTerm: String!
-          ) @inContext(country: $country, language: $language, market: { handle: $market }) {
+          ) @inContext(country: $country, language: $language) {
             search(
               first: 1,
               query: $searchTerm,
@@ -69,7 +66,6 @@ export const getFilters = async ({
             searchTerm,
             country: storefront.i18n.country,
             language: storefront.i18n.language,
-            market: context.env.SHOPIFY_STOREFRONT_MARKET,
           },
           cache: storefront.CacheShort(),
         },
@@ -82,8 +78,7 @@ export const getFilters = async ({
             $handle: String!,
             $country: CountryCode,
             $language: LanguageCode
-            $market: String
-          ) @inContext(country: $country, language: $language, market: { handle: $market }) {
+          ) @inContext(country: $country, language: $language) {
             collection(handle: $handle) {
               products(first: 1) {
                 filters {
@@ -106,7 +101,6 @@ export const getFilters = async ({
             handle,
             country: storefront.i18n.country,
             language: storefront.i18n.language,
-            market: context.env.SHOPIFY_STOREFRONT_MARKET,
           },
           cache: storefront.CacheShort(),
         },

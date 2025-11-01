@@ -284,9 +284,8 @@ export const PRODUCT_QUERY = `#graphql
     $handle: String!
     $country: CountryCode
     $language: LanguageCode
-    $market: String
     $selectedOptions: [SelectedOptionInput!]!
-  ) @inContext(country: $country, language: $language, market: { handle: $market }) {
+  ) @inContext(country: $country, language: $language) {
     product(handle: $handle) {
       ... on Product {
         ...ProductFragment
@@ -301,8 +300,7 @@ export const PRODUCT_ITEM_QUERY = `#graphql
     $handle: String!
     $country: CountryCode
     $language: LanguageCode
-    $market: String
-  ) @inContext(country: $country, language: $language, market: { handle: $market }) {
+  ) @inContext(country: $country, language: $language) {
     product(handle: $handle) {
       ... on Product {
         ...ProductItemFragment
@@ -317,8 +315,7 @@ export const PRODUCT_ITEM_QUERY_BY_ID = `#graphql
     $id: ID!
     $country: CountryCode
     $language: LanguageCode
-    $market: String
-  ) @inContext(country: $country, language: $language, market: { handle: $market }) {
+  ) @inContext(country: $country, language: $language) {
     product(id: $id) {
       ... on Product {
         ...ProductItemFragment
@@ -333,8 +330,7 @@ export const PRODUCT_OPTIONS_QUERY = `#graphql
     $handle: String!
     $country: CountryCode
     $language: LanguageCode
-    $market: String
-  ) @inContext(country: $country, language: $language, market: { handle: $market }) {
+  ) @inContext(country: $country, language: $language) {
     product(handle: $handle) {
       options {
         ...OptionFragment
@@ -353,10 +349,9 @@ export const PRODUCTS_QUERY = `#graphql
     $reverse: Boolean
     $country: CountryCode
     $language: LanguageCode
-    $market: String
     $sortKey: ProductSortKeys
     $endCursor: String
-  ) @inContext(country: $country, language: $language, market: { handle: $market }) {
+  ) @inContext(country: $country, language: $language) {
     products(first: $first, sortKey: $sortKey, reverse: $reverse, query: $query, after: $endCursor) {
       pageInfo {
         startCursor
@@ -380,8 +375,7 @@ export const PRODUCT_FEED_QUERY = `#graphql
     $cursor: String
     $country: CountryCode
     $language: LanguageCode
-    $market: String
-  ) @inContext(country: $country, language: $language, market: { handle: $market }) {
+  ) @inContext(country: $country, language: $language) {
     products(first: $first, after: $cursor) {
       pageInfo {
         hasNextPage
@@ -405,8 +399,7 @@ export const PRODUCT_RECOMMENDATIONS_QUERY = `#graphql
       $intent: ProductRecommendationIntent
       $country: CountryCode
       $language: LanguageCode
-      $market: String
-    ) @inContext(country: $country, language: $language, market: { handle: $market }) {
+    ) @inContext(country: $country, language: $language) {
       productRecommendations(productId: $productId, intent: $intent) {
         ... on Product {
           ...ProductItemFragment

@@ -14,8 +14,7 @@ export const PRODUCTS_SEARCH_QUERY = `#graphql
     $startCursor: String,
     $sortKey: SearchSortKeys,
     $reverse: Boolean
-    $market: String
-  ) @inContext(country: $country, language: $language, market: { handle: $market }) {
+  ) @inContext(country: $country, language: $language) {
     search(
       first: $first,
       last: $last,
@@ -104,8 +103,7 @@ export const PREDICTIVE_SEARCH_QUERY = `#graphql
     $limitScope: PredictiveSearchLimitScope!
     $searchTerm: String!
     $types: [PredictiveSearchType!]
-    $market: String
-  ) @inContext(country: $country, language: $language, market: { handle: $market }) {
+  ) @inContext(country: $country, language: $language) {
     predictiveSearch(
       limit: $limit,
       limitScope: $limitScope,

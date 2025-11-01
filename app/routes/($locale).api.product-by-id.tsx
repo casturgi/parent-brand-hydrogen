@@ -28,7 +28,6 @@ export async function loader({request, context}: LoaderFunctionArgs) {
         id,
         country: storefront.i18n.country,
         language: storefront.i18n.language,
-        market: context.env.SHOPIFY_STOREFRONT_MARKET,
       },
       cache: storefront.CacheShort(),
     },

@@ -64,7 +64,6 @@ export async function loader({request, context}: LoaderFunctionArgs) {
       searchTerm,
       siteSettings,
       storefront,
-      context,
     });
 
     filters = filtersData.filters;
@@ -87,7 +86,6 @@ export async function loader({request, context}: LoaderFunctionArgs) {
         filters,
         country: storefront.i18n.country,
         language: storefront.i18n.language,
-        market: context.env.SHOPIFY_STOREFRONT_MARKET,
         ...paginationVariables,
       },
       cache: storefront.CacheShort(),

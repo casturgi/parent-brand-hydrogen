@@ -41,7 +41,7 @@ const POLICY_FRAGMENT = `#graphql
 ` as const;
 
 export const SHOP_QUERY = `#graphql
-  query Shop($country: CountryCode, $language: LanguageCode, $market: String) @inContext(country: $country, language: $language, market: { handle: $market }) {
+  query Shop($country: CountryCode, $language: LanguageCode) @inContext(country: $country, language: $language) {
     shop {
       description
       moneyFormat
@@ -81,7 +81,7 @@ export const SHOP_QUERY = `#graphql
 // Docs: https://shopify.dev/docs/api/storefront/latest/queries/localization
 
 export const LOCALIZATION_QUERY = `#graphql
-  query Localization($country: CountryCode, $language: LanguageCode, $market: String) @inContext(country: $country, language: $language, market: { handle: $market }) {
+  query Localization($country: CountryCode, $language: LanguageCode) @inContext(country: $country, language: $language) {
     shop {
       paymentSettings {
         enabledCurrencies: enabledPresentmentCurrencies
