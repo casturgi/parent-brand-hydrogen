@@ -42,6 +42,7 @@ export async function loader({params, context, request}: LoaderFunctionArgs) {
     searchParams,
     siteSettings,
     storefront,
+    context,
   });
 
   const sortKey = String(
@@ -75,6 +76,7 @@ export async function loader({params, context, request}: LoaderFunctionArgs) {
         filters,
         country: storefront.i18n.country,
         language: storefront.i18n.language,
+        market: context.env.SHOPIFY_STOREFRONT_MARKET,
         ...paginationVariables,
       },
       cache: storefront.CacheShort(),

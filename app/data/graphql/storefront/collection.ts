@@ -75,6 +75,7 @@ export const COLLECTION_QUERY = `#graphql
     $handle: String!,
     $country: CountryCode,
     $language: LanguageCode
+    $market: String
     $sortKey: ProductCollectionSortKeys
     $reverse: Boolean
     $filters: [ProductFilter!]
@@ -82,7 +83,7 @@ export const COLLECTION_QUERY = `#graphql
     $last: Int
     $startCursor: String
     $endCursor: String
-  ) @inContext(country: $country, language: $language) {
+  ) @inContext(country: $country, language: $language, market: { handle: $market }) {
     collection(handle: $handle) {
       ... on Collection {
         ...CollectionFragment
@@ -97,7 +98,8 @@ export const COLLECTION_FILTERS_QUERY = `#graphql
     $handle: String!,
     $country: CountryCode,
     $language: LanguageCode
-  ) @inContext(country: $country, language: $language) {
+    $market: String
+  ) @inContext(country: $country, language: $language, market: { handle: $market }) {
     collection(handle: $handle) {
       products(first: 1) {
         filters {

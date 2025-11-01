@@ -50,6 +50,7 @@ export const getSelectedProductOptions = async ({
           handle,
           country: storefront.i18n.country,
           language: storefront.i18n.language,
+          market: context.env.SHOPIFY_STOREFRONT_MARKET,
         },
         cache: storefront.CacheShort(),
       },
@@ -118,6 +119,7 @@ export const queryProducts = async ({
         endCursor: cursor,
         country: storefront.i18n.country,
         language: storefront.i18n.language,
+        market: context.env.SHOPIFY_STOREFRONT_MARKET,
       },
       cache: storefront.CacheShort(),
     });
@@ -248,6 +250,7 @@ export const getModalProduct = async ({
         selectedOptions,
         country: storefront.i18n.country,
         language: storefront.i18n.language,
+        market: context.env.SHOPIFY_STOREFRONT_MARKET,
       },
       cache: storefront.CacheShort(),
     });
